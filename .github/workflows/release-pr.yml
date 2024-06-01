@@ -20,8 +20,11 @@ jobs:
                            --arg base "main" \
                            --arg body "Automated PR to merge release branch into main based on release event." \
                            '{title: $title, head: $head, base: $base, body: $body}')
+          echo "pr_data: $pr_data"
+          pr_url="https://api.github.com/repos/${{ github.repository }}/pulls"
+          echo "pr_url: $pr_url"
           response=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
                            -H "Content-Type: application/json" \
                            -d "$pr_data" \
-                           https://api.github.com/repos/${{ github.repository }}/pulls
+                           ${{ pr_url }})
           echo "$response" | jq .
