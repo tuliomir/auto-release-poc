@@ -1,0 +1,27 @@
+name: Create PR on Release
+
+on:
+  release:
+    types: [released]
+
+jobs:
+  create-pull-request:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Create Pull Request
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          pr_data=$(jq -n --arg title "Merge release into master" \
+                           --arg head "release" \
+                           --arg base "main" \
+                           --arg body "Automated PR to merge release branch into main based on release event." \
+                           '{title: $title, head: $head, base: $base, body: $body}')
+          response=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
+                           -H "Content-Type: application/json" \
+                           -d "$pr_data" \
+                           https://api.github.com/repos/${{ github.repository }}/pulls)
+          echo "$response" | jq .
