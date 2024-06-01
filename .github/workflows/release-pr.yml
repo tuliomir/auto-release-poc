@@ -26,5 +26,5 @@ jobs:
           response=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
                            -H "Content-Type: application/json" \
                            -d "$pr_data" \
-                           ${{ pr_url }})
+                           "$pr_url")
           echo "$response" | jq .
