@@ -22,7 +22,7 @@ jobs:
           GH_TOKEN: ${{ secrets.RELEASE_TOKEN }}
         run: |
           # Authenticate to add cards to a project
-          auth auth refresh -s project
+          gh auth refresh -s project
           
           # Building the PR Data
           PR_DATA=$(gh pr create \
