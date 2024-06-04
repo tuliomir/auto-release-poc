@@ -28,7 +28,7 @@ jobs:
           PR_DATA=$(gh pr create \
             --title "Merge release into master" \
             --body "Automated PR to merge release branch into main based on release event." \
-            --base "main"
-            --head "release"
+            --base "main" \
+            --head "release" \
             --assignee "@me")
           echo "PR_DATA: $PR_DATA"
