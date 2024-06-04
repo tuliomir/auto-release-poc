@@ -22,8 +22,7 @@ jobs:
           GH_TOKEN: ${{ secrets.RELEASE_TOKEN }}
         run: |
           # Authenticate to add cards to a project
-          gh auth login --with-token
-          gh auth refresh -s project
+          gh auth setup-git
           
           # Building the PR Data
           PR_DATA=$(gh pr create \
@@ -33,4 +32,4 @@ jobs:
             --head "release" \
             --assignee "@me" \
             --project "@tuliomir's test project")
-          echo "PR_DATA: $PR_DATA"
+          echo "PR url: $PR_DATA"
