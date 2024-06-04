@@ -22,7 +22,7 @@ jobs:
           GH_TOKEN: ${{ secrets.RELEASE_TOKEN }}
         run: |
           # Authenticate to add cards to a project
-          # auth auth refresh -s project
+          auth auth refresh -s project
           
           # Building the PR Data
           PR_DATA=$(gh pr create \
@@ -30,5 +30,6 @@ jobs:
             --body "Automated PR to merge release branch into main based on release event." \
             --base "main" \
             --head "release" \
-            --assignee "@me")
+            --assignee "@me" \
+            --project "@tuliomir's test project")
           echo "PR_DATA: $PR_DATA"
