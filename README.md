@@ -2,6 +2,8 @@
 A repository to test the automatic merge on release event
 
 ## Concept description
+_Note:_ This workflow was improved by using the GitHub CLI instead of direct API calls.
+
 You can create a pull request directly within your GitHub Actions workflow using the GitHub API. Here is a revised version of the workflow that creates a pull request without using the `peter-evans/create-pull-request` action. This approach uses a script to interact with the GitHub API.
 
 ### Example Workflow
